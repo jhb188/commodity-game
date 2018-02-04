@@ -9,6 +9,10 @@ import {
 } from 'react-router-dom'
 
 import store from 'store'
+import {
+    // userIsAuthenticated,
+    userIsNotAuthenticated,
+} from 'store/auth/enhancers'
 
 import App from 'components/App'
 import Login from 'components/Login'
@@ -21,8 +25,8 @@ ReactDOM.render(
     <ReduxProvider store={ store }>
         <BrowserRouter>
             <App>
-                <Route path="/login" component={ Login } />
-                <Route path="/signup" component={ Signup } />
+                <Route path="/login" component={ userIsNotAuthenticated(Login) } />
+                <Route path="/signup" component={ userIsNotAuthenticated(Signup) } />
             </App>
         </BrowserRouter>
     </ReduxProvider>,

@@ -8,6 +8,6 @@ export default (
 ) => {
     switch (action.type) {
         default:
-            return state;
+            return state
     }
 }

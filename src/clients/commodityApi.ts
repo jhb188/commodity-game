@@ -9,6 +9,7 @@ const setAuthorizationHeader = (config, jwt) => assocPath(
 
 export const commodityApi = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
+    responseType: 'json',
 })
 
 export const commodityApiConfig = {
@@ -27,7 +28,7 @@ export const commodityApiConfig = {
         }],
         response: [{
             error: (_, error) => {
-                const { response } = error
+                const { response = {} } = error
                 const { status } = response
 
                 switch (status) {

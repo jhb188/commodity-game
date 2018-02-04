@@ -5,15 +5,19 @@ import { Form, Icon, Header } from 'semantic-ui-react'
 const Login = ({
     confirmPassword,
     editConfirmPassword,
+    editEmail,
     editPassword,
     editUsername,
+    email,
+    errors,
+    isSubmitting,
     onSubmit,
     password,
     username,
 }) =>
     <Row>
         <Col xs={ 12 } sm={ 6 } smOffset={ 3 } md={ 4 } mdOffset={ 4 }>
-            <Form warning onSubmit={ onSubmit }>
+            <Form loading={ isSubmitting } warning onSubmit={ onSubmit }>
                 <Header as="h2" icon textAlign="center">
                     <Icon name="game" circular />
                     <Header.Content>
@@ -22,6 +26,16 @@ const Login = ({
                 </Header>
 
                 <Form.Input
+                    error={ Boolean(errors.email) }
+                    label="Email"
+                    onChange={ editEmail }
+                    placeholder="email@example.com"
+                    type="email"
+                    value={ email }
+                />
+
+                <Form.Input
+                    error={ Boolean(errors.username) }
                     label="Username"
                     onChange={ editUsername }
                     placeholder="username"
@@ -29,6 +43,7 @@ const Login = ({
                 />
 
                 <Form.Input
+                    error={ Boolean(errors.password) }
                     label="Password"
                     onChange={ editPassword }
                     placeholder="password"
