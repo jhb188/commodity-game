@@ -9,7 +9,7 @@ const style = {
 
 const App: React.StatelessComponent<{ children?: React.ReactNode }> = ({ children }) =>
     <div style={ style.container }>
-        <Navbar isLoggedIn={ false } />
+        <Navbar />
 
         { children }
     </div>

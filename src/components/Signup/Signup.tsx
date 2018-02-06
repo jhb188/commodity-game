@@ -52,7 +52,7 @@ const Login = ({
                 />
 
                 <Form.Input
-                    label="Password"
+                    label="Confirm Password"
                     onChange={ editConfirmPassword }
                     placeholder="password"
                     type="password"
