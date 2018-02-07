@@ -4,13 +4,13 @@ import { withRouter } from 'react-router-dom'
 import App from './App'
 
 export default compose(
+    withRouter,
     connect(
         ({ auth }) => ({
             token: auth.token,
             user: auth.data,
         })
     ),
-    withRouter,
     lifecycle({
         componentWillReceiveProps(
             nextProps: {

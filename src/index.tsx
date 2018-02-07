@@ -5,12 +5,12 @@ import {
     BrowserRouter,
     // Redirect,
     Route,
-    // Switch,
+    Switch,
 } from 'react-router-dom'
 
 import store from 'store'
 import {
-    // userIsAuthenticated,
+    userIsAuthenticated,
     userIsNotAuthenticated,
 } from 'store/auth/enhancers'
 
@@ -25,8 +25,11 @@ ReactDOM.render(
     <ReduxProvider store={ store }>
         <BrowserRouter>
             <App>
-                <Route path="/login" component={ userIsNotAuthenticated(Login) } />
-                <Route path="/signup" component={ userIsNotAuthenticated(Signup) } />
+                <Switch>
+                    <Route exact path="/" component={ userIsAuthenticated(() => null) } />
+                    <Route path="/login" component={ userIsNotAuthenticated(Login) } />
+                    <Route path="/signup" component={ userIsNotAuthenticated(Signup) } />
+                </Switch>
             </App>
         </BrowserRouter>
     </ReduxProvider>,

@@ -5,7 +5,7 @@ import PageLoader from 'components/shared/PageLoader'
 const locationHelper = locationHelperBuilder({})
 
 export const userIsAuthenticated = connectedRouterRedirect({
-    authenticatedSelector: state => state.auth.data.id,
+    authenticatedSelector: state => Boolean(state.auth.data.id),
     authenticatingSelector: state => state.auth.isFetching,
     wrapperDisplayName: 'UserIsAuthenticated',
     AuthenticatingComponent: PageLoader,
@@ -13,7 +13,7 @@ export const userIsAuthenticated = connectedRouterRedirect({
 })
 
 export const userIsNotAuthenticated = connectedRouterRedirect({
-    authenticatedSelector: state => !state.auth.data.id,
+    authenticatedSelector: state => Boolean(!state.auth.data.id),
     authenticatingSelector: state => state.auth.isFetching,
     wrapperDisplayName: 'UserIsNotAuthenticated',
     AuthenticatingComponent: PageLoader,
