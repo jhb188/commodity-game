@@ -16,6 +16,7 @@ import {
 
 import App from 'components/App'
 import Login from 'components/Login'
+import Sets from 'components/Sets'
 import Signup from 'components/Signup'
 
 import 'semantic-ui-css/semantic.min.css'
@@ -27,6 +28,8 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route exact path="/" component={ userIsAuthenticated(() => null) } />
+                    <Route path="/sets/:commoditySetId?/:commodityId?" component={ userIsAuthenticated(Sets) } />
+
                     <Route path="/login" component={ userIsNotAuthenticated(Login) } />
                     <Route path="/signup" component={ userIsNotAuthenticated(Signup) } />
                 </Switch>

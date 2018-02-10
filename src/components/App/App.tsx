@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 
 const style = {
     container: {
-        padding: '60px 10px',
+        padding: '60px 0px',
     },
 }
 

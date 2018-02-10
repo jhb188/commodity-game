@@ -1,14 +1,15 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Menu } from 'semantic-ui-react'
+import { Dropdown, Menu } from 'semantic-ui-react'
 
 interface NavbarProps {
     activeRoute: string,
     isLoggedIn: boolean,
+    username?: string,
 }
 
 const loggedInMenuItems = [
-    'Home',
+    'Sets',
 ]
 
 const loggedOutMenuItems = [
@@ -19,6 +20,7 @@ const loggedOutMenuItems = [
 const Navbar: React.StatelessComponent<NavbarProps> = ({
     activeRoute,
     isLoggedIn,
+    username,
 }) =>
     <Menu fixed="top" inverted>
         <Menu.Menu position="left">
@@ -46,6 +48,21 @@ const Navbar: React.StatelessComponent<NavbarProps> = ({
                             </Menu.Item>
                         )
                     }
+                )
+            }
+            {
+                username && (
+                    <Dropdown item text={ username }>
+                        <Dropdown.Menu>
+                            <Dropdown.Item as={ Link } to="/profile">
+                                Profile
+                            </Dropdown.Item>
+
+                            <Dropdown.Item>
+                                Log out
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 )
             }
         </Menu.Menu>

@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/redux-form": "^7.0.13",
     "axios": "^0.17.1",
+    "capitalize": "^1.0.0",
     "normalizr": "^3.2.4",
     "prop-types": "^15.6.0",
     "ramda": "^0.25.0",

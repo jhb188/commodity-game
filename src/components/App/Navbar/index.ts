@@ -9,5 +9,6 @@ export default compose(
     mapProps(({ location, user }) => ({
         activeRoute: location.pathname,
         isLoggedIn: Boolean(user.id),
+        username: user.username,
     }))
 )(Navbar)
