@@ -15,7 +15,7 @@ export const createUser = data => ({
         request: {
             data,
             method: 'POST',
-            url: '/users',
+            url: '/signup',
         }
     }
 })

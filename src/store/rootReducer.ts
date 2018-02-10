@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as form } from 'redux-form'
-import { RESET_STATE } from './auth/constants'
+import { LOG_OUT } from './auth/constants'
 import auth from './auth/reducer'
 import commoditySets from './commoditySets/reducer'
 import login from './login/reducer'
@@ -15,7 +15,7 @@ const appReducer = combineReducers({
 })
 
 export default (state, action) => appReducer(
-    action.type === RESET_STATE
+    action.type === LOG_OUT
         ? undefined
         : state,
     action

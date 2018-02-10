@@ -3,7 +3,7 @@ import { assocPath } from 'ramda'
 
 const setAuthorizationHeader = (config, jwt) => assocPath(
     ['headers', 'Authorization'],
-    `Token ${jwt}`,
+    `Bearer ${jwt}`,
     config
 )
 

@@ -5,6 +5,7 @@ import { Dropdown, Menu } from 'semantic-ui-react'
 interface NavbarProps {
     activeRoute: string,
     isLoggedIn: boolean,
+    logout: Function,
     username?: string,
 }
 
@@ -20,6 +21,7 @@ const loggedOutMenuItems = [
 const Navbar: React.StatelessComponent<NavbarProps> = ({
     activeRoute,
     isLoggedIn,
+    logout,
     username,
 }) =>
     <Menu fixed="top" inverted>
@@ -58,7 +60,7 @@ const Navbar: React.StatelessComponent<NavbarProps> = ({
                                 Profile
                             </Dropdown.Item>
 
-                            <Dropdown.Item>
+                            <Dropdown.Item onClick={ () => logout() }>
                                 Log out
                             </Dropdown.Item>
                         </Dropdown.Menu>

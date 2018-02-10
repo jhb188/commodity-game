@@ -1,4 +1,4 @@
-import { CREATE_SESSION } from './constants'
+import { CREATE_SESSION, LOG_OUT } from './constants'
 
 export const createSession = (username, password) => ({
     type: CREATE_SESSION,
@@ -9,7 +9,14 @@ export const createSession = (username, password) => ({
                 password,
             },
             method: 'POST',
-            url: '/sessions'
+            url: '/login'
         },
     },
 })
+
+export const logout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+
+    return { type: LOG_OUT }
+}
