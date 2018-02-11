@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Dropdown, Grid } from 'semantic-ui-react'
+import { compose, uniq, pluck } from 'ramda'
 import Commodities from './Commodities'
 import SelectedCommodityOverview from './SelectedCommodityOverview'
 import SelectedCommodityTrade from './SelectedCommodityTrade'
@@ -9,13 +10,19 @@ const style = {
     commoditiesCol: {
         minHeight: 70,
     },
+    container: {
+        paddingTop: 0,
+    },
     dropdown: {
         marginLeft: 20,
     },
 }
 
+const getOwnedCommodities = compose(uniq, pluck('commodityId'))
+
 const Sets = ({
     commodities,
+    commodityItems,
     orderedCommodities,
     orderedCommoditySets,
     selectedCommodityId,
@@ -27,6 +34,7 @@ const Sets = ({
         <Grid
             padded
             stackable
+            style={ style.container }
         >
             <Grid.Row>
                 <Grid.Column>
@@ -58,6 +66,7 @@ const Sets = ({
                                 c => c.commoditySetId === selectedCommoditySetId
                             )
                         }
+                        ownedCommodities={ getOwnedCommodities(commodityItems) }
                         selectedCommodityId={ selectedCommodityId }
                     />
                 </Grid.Column>
@@ -69,6 +78,11 @@ const Sets = ({
                         selectedCommodity
                             ? (
                                 <SelectedCommodityOverview
+                                    numberCollected={
+                                        commodityItems.filter(
+                                            ({ commodityId }) => commodityId === selectedCommodityId
+                                        ).length
+                                    }
                                     selectedCommodity={ selectedCommodity }
                                 />
                             ) : null

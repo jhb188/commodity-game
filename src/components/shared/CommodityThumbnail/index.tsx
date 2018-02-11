@@ -3,7 +3,7 @@ import CommodityThumbnail from './CommodityThumbnail'
 
 interface HoverableCommodityThumbnailProps {
     active: boolean,
-    disabled: boolean,
+    dimmed: boolean,
     src: string,
     to: string,
 }

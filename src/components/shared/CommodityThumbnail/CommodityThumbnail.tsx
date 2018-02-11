@@ -29,7 +29,7 @@ const style = {
 
 const CommodityThumbnail = ({
     active,
-    disabled,
+    dimmed,
     hovered,
     onHover,
     onLeave,
@@ -46,7 +46,7 @@ const CommodityThumbnail = ({
         style={{
             ...style.image,
             ...(hovered ? style.hoveredImage : {}),
-            ...(disabled ? style.disabledImage : {}),
+            ...(dimmed ? style.disabledImage : {}),
             ...(active ? style.activeImage : {}),
         }}
         to={ to }

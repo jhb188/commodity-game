@@ -9,6 +9,7 @@ interface CommoditiesProps {
         image: string,
     }>,
     imagesLoaded: boolean,
+    ownedCommodities: Array<number>,
     selectedCommodityId: number,
 }
 
@@ -33,6 +34,7 @@ const Placeholder = () => <div style={ style.placeholder } />
 const Commodities: React.StatelessComponent<CommoditiesProps> = ({
     commodities,
     imagesLoaded,
+    ownedCommodities,
     selectedCommodityId,
 }) =>
     <Dimmer.Dimmable
@@ -44,18 +46,18 @@ const Commodities: React.StatelessComponent<CommoditiesProps> = ({
         <Dimmer active={ !imagesLoaded } inverted />
 
         {
-            commodities.map(c =>
+            commodities.map(({ commoditySetId, id, image }) =>
                 imagesLoaded
                     ? (
                         <CommodityThumbnail
-                            active={ c.id === selectedCommodityId }
-                            disabled={ false }
-                            key={ c.id }
-                            src={ c.image }
-                            to={ `/sets/${c.commoditySetId}/${c.id}` }
+                            active={ id === selectedCommodityId }
+                            dimmed={ !ownedCommodities.includes(id) }
+                            key={ id }
+                            src={ image }
+                            to={ `/sets/${commoditySetId}/${id}` }
                         />
                     )
-                    : <Placeholder key={ c.id } />
+                    : <Placeholder key={ id } />
             )
         }
     </Dimmer.Dimmable>
