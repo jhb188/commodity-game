@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Container, Dimmer } from 'semantic-ui-react'
 
 interface ImgProps {
     images: Array<string>,
@@ -45,18 +44,7 @@ const preloadImages = EnhancedComponent => {
         }
 
         render() {
-            const enhanced = <EnhancedComponent { ...this.props } />
-            if (this.state.allLoaded) {
-                return enhanced
-            }
-
-            return (
-                <Dimmer.Dimmable as={ Container } blurring dimmed>
-                    <Dimmer active>
-                        { enhanced }
-                    </Dimmer>
-                </Dimmer.Dimmable>
-            )
+            return <EnhancedComponent { ...this.props } imagesLoaded={ this.state.allLoaded } />
         }
     }
 

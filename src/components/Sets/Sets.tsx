@@ -42,7 +42,7 @@ const Sets = ({
                         }
                         placeholder="Select a set"
                         style={ style.dropdown }
-                        value={ selectedCommoditySetId || null }
+                        value={ orderedCommoditySets.length && selectedCommoditySetId || null }
                     />
                 </Grid.Column>
             </Grid.Row>

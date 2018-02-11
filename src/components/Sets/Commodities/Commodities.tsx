@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Container, Dimmer } from 'semantic-ui-react'
 import CommodityThumbnail from 'components/shared/CommodityThumbnail'
 
 interface CommoditiesProps {
@@ -7,6 +8,7 @@ interface CommoditiesProps {
         commoditySetId: number,
         image: string,
     }>,
+    imagesLoaded: boolean,
     selectedCommodityId: number,
 }
 
@@ -17,24 +19,45 @@ const style = {
         flexFlow: 'row wrap',
         justifyContent: 'center',
     } as React.HTMLAttributes<HTMLDivElement>,
+    placeholder: {
+        backgroundColor: 'grey',
+        borderRadius: '500rem',
+        height: 35,
+        width: 35,
+        margin: '.75rem',
+    },
 }
+
+const Placeholder = () => <div style={ style.placeholder } />
 
 const Commodities: React.StatelessComponent<CommoditiesProps> = ({
     commodities,
+    imagesLoaded,
     selectedCommodityId,
 }) =>
-    <div style={ style.container }>
+    <Dimmer.Dimmable
+        as={ Container }
+        blurring
+        dimmed={ !imagesLoaded }
+        style={ style.container }
+    >
+        <Dimmer active={ !imagesLoaded } inverted />
+
         {
             commodities.map(c =>
-                <CommodityThumbnail
-                    active={ c.id === selectedCommodityId }
-                    disabled={ false }
-                    key={ c.id }
-                    src={ c.image }
-                    to={ `/sets/${c.commoditySetId}/${c.id}` }
-                />
+                imagesLoaded
+                    ? (
+                        <CommodityThumbnail
+                            active={ c.id === selectedCommodityId }
+                            disabled={ false }
+                            key={ c.id }
+                            src={ c.image }
+                            to={ `/sets/${c.commoditySetId}/${c.id}` }
+                        />
+                    )
+                    : <Placeholder key={ c.id } />
             )
         }
-    </div>
+    </Dimmer.Dimmable>
 
 export default Commodities
