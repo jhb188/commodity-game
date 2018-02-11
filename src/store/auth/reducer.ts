@@ -4,6 +4,7 @@ import {
 } from 'store/signup/constants'
 import {
     CREATE_SESSION_SUCCESS,
+    LOG_OUT,
 } from './constants'
 
 interface AuthState {
@@ -34,6 +35,13 @@ const reducer: (state: AuthState, action: Redux.AnyAction) => AuthState = (
                 token,
                 hasFetched: true,
                 isFetching: false,
+            }
+
+        case LOG_OUT:
+            return {
+                ...state,
+                token: '',
+                data: {},
             }
 
         default:

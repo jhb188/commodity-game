@@ -15,61 +15,74 @@ const style = {
 }
 
 const Sets = ({
+    commodities,
     orderedCommodities,
     orderedCommoditySets,
     selectedCommodityId,
     selectedCommoditySetId,
-}) =>
-    <Grid
-        padded
-        stackable
-    >
-        <Grid.Row>
-            <Grid.Column>
-                <Dropdown
-                    options={
-                        orderedCommoditySets.map(({ id, name }) => ({
-                            as: Link,
-                            key: id,
-                            text: name,
-                            to: `/sets/${id}`,
-                            value: id,
-                        }))
+}) => {
+    const selectedCommodity = commodities[selectedCommodityId]
+
+    return (
+        <Grid
+            padded
+            stackable
+        >
+            <Grid.Row>
+                <Grid.Column>
+                    <Dropdown
+                        options={
+                            orderedCommoditySets.map(({ id, name }) => ({
+                                as: Link,
+                                key: id,
+                                text: name,
+                                to: `/sets/${id}`,
+                                value: id,
+                            }))
+                        }
+                        placeholder="Select a set"
+                        style={ style.dropdown }
+                        value={ selectedCommoditySetId || null }
+                    />
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column
+                    tablet={ 16 }
+                    computer={ 3 }
+                    style={ style.commoditiesCol }
+                >
+                    <Commodities
+                        commodities={
+                            orderedCommodities.filter(
+                                c => c.commoditySetId === selectedCommoditySetId
+                            )
+                        }
+                        selectedCommodityId={ selectedCommodityId }
+                    />
+                </Grid.Column>
+                <Grid.Column
+                    tablet={ 16 }
+                    computer={ 6 }
+                >
+                    {
+                        selectedCommodity
+                            ? (
+                                <SelectedCommodityOverview
+                                    selectedCommodity={ selectedCommodity }
+                                />
+                            ) : null
                     }
-                    placeholder="Select a set"
-                    style={ style.dropdown }
-                    value={ selectedCommoditySetId || null }
-                />
-            </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-            <Grid.Column
-                tablet={ 16 }
-                computer={ 3 }
-                style={ style.commoditiesCol }
-            >
-                <Commodities
-                    commodities={
-                        orderedCommodities.filter(
-                            c => c.commoditySetId === selectedCommoditySetId
-                        )
-                    }
-                    selectedCommodityId={ selectedCommodityId }
-                />
-            </Grid.Column>
-            <Grid.Column
-                tablet={ 16 }
-                computer={ 6 }
-            >
-                <SelectedCommodityOverview />
-            </Grid.Column>
-            <Grid.Column
-                tablet={ 16 }
-                computer={ 7 }
-            >
-                <SelectedCommodityTrade />
-            </Grid.Column>
-        </Grid.Row>
-    </Grid>
+                </Grid.Column>
+                <Grid.Column
+                    tablet={ 16 }
+                    computer={ 7 }
+                >
+                    <SelectedCommodityTrade />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
+    )
+}
 
 export default Sets
